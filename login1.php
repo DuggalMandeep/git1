@@ -28,8 +28,36 @@ $query="INSERT INTO Student_Record(sname,class,fname,mname,fc,pc,dob,gen,email,a
 $result = mysqli_query($connect, $query);
 if($result){
     //echo "Records inserted successfully.";
-    header('Location: login1.html');
-} else{
+    //header('Location: login1.html');
+    echo '<html>
+    <head>
+    <title>Login</title>
+    </head>
+    <body>
+      <center>
+        <form name="upload" action=upload.php method="POST" enctype="multipart/form-data">
+          <fieldset>
+            <tr><h2>Record Submitted successfully</h2></tr>
+            <tr><h3>Upload following files</h3></tr>
+            <table cellspacing="10">
+            <tr>
+              <td>Upload Photo  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</td>
+              <td><input type="file" name="photo" accept="image/gif, image/jpeg, image/png"></td>
+            </tr>
+            <tr>
+              <td>Upload signature :&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+              <td><input type="file" name="sign" accept="image/gif, image/jpeg, image/png"></td>
+            </tr>
+            </table>
+            <input type="submit" name="submit"s width="100" height="48" value="Upload">
+          </fieldset>
+        </form>
+      </center>
+    </body>
+    </html>'; 
+
+} else
+  {
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($connect);
-}
+  }
 ?>
