@@ -7,17 +7,23 @@ $usr=$_POST["id"];
 $pas=$_POST["pas"];
 $a=0;
 $connect = mysqli_connect("localhost","root","","erp") or Die("Not Connected");
-$command = "SELECT * FROM login WHERE id='$usr'";
+$command = "SELECT * FROM login";
 $query = mysqli_query($connect,$command) or die(mysqli_error($query));
+
+//echo mysqli_num_rows($query);
 if(mysqli_num_rows($query) > 0){
+
   while($row = mysqli_fetch_assoc($query)) {
-    if((strcmp($usr,$row["id"]))==0 and (strcmp($pas,$row["Password"])==0)) {
+    //if((strcmp($usr,$row["id"]))==0 and (strcmp($pas,$row["Password"])==0)) {
+    if($usr == $row["id"] && $pas == $row["Password"]){
       $a=1;
       $_SESSION["log"] = 1;
     }
   }
+
+
   if($a==0){
-    header('Location:Auth.html');
+    header('Location:index.html');
   }
 }?>
 <html><head><title>DATA</title>
@@ -56,7 +62,7 @@ if(mysqli_num_rows($query) > 0)
         $result = mysqli_fetch_assoc($query1);
            $ppicture = $result['image'];
           $output .= '<tr >
-                          <td><center >'.'<img height="100px" width="100px" src="data:image;base64,'.$ppicture.'</center></td>
+                          <td><center >'.'<img height="100px" width="100px" src="data:image;base64,'.$ppicture.'"/></center></td>
                           <td><center >'. $row["id"] .'</center></td>
                           <td><center >'. $row["sname"] .'</center></td>
                           <td><center >'. $row["fname"] .'</center></td>

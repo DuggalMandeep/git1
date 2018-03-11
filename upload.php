@@ -55,7 +55,7 @@ function Display(){
                 <td><?php echo '<img height="100px" width="100px" src="data:image;base64,'.$spicture.'">';  ?></td>
               </tr>
               </table>
-              <form action="Auth.html">
+              <form action="regisForm.html">
               <button name="submit" type="submit"> Final Submit </button>
             </form>
             </fieldset>
