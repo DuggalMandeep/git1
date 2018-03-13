@@ -57,12 +57,12 @@ if(mysqli_num_rows($query) > 0)
      {
        $idd = $row["id"];
       // $connect = mysqli_connect("localhost","root","","erp") or Die("Not Connected");
-       $command = "SELECT * FROM photo_data WHERE id = '$idd'";
+       $command = "SELECT * FROM Student_Record WHERE id = '$idd'";
        $query1 = mysqli_query($connect,$command)or die(mysqli_error($query));
         $result = mysqli_fetch_assoc($query1);
-           $ppicture = $result['image'];
+          // $ppicture = $result['image'];
           $output .= '<tr >
-                          <td><center >'.'<img height="100px" width="100px" src="data:image;base64,'.$ppicture.'"/></center></td>
+                          <td><center >'.'<img height="100px" width="100px" src="data:image;base64,'.$row["image"].'"/></center></td>
                           <td><center >'. $row["id"] .'</center></td>
                           <td><center >'. $row["sname"] .'</center></td>
                           <td><center >'. $row["fname"] .'</center></td>

@@ -26,6 +26,19 @@ if($connect === false){
 }
 $query="INSERT INTO Student_Record(sname,class,fname,mname,fc,pc,dob,gen,email,addr,city,state,pin)VALUES('$sname','$clas','$fname','$mname','$fc','$pc','$dob','$gen','$mail','$add','$city','$state','$pin')";
 $result = mysqli_query($connect, $query);
+
+$query2 = "SELECT id FROM Student_Record WHERE pc = $pc AND sname = '$sname'" ;
+$result2 = mysqli_query($connect, $query2) or die(mysqli_error($connect));
+
+if(mysqli_num_rows($result2) > 0){
+
+  while($row = mysqli_fetch_assoc($result2)) {
+      $_SESSION["id"] = $row["id"];
+      //echo $_SESSION["id"];
+    }
+  }
+
+
 if($result){
     //echo "Records inserted successfully.";
     //header('Location: login1.html');
@@ -42,11 +55,11 @@ if($result){
             <table cellspacing="10">
             <tr>
               <td>Upload Photo  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</td>
-              <td><input type="file" name="photo" accept="image/gif, image/jpeg, image/png"></td>
+              <td><input type="file" name="photo" accept="image/gif, image/jpg, image/png"></td>
             </tr>
             <tr>
               <td>Upload signature :&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
-              <td><input type="file" name="sign" accept="image/gif, image/jpeg, image/png"></td>
+              <td><input type="file" name="signature" accept="image/jpg, image/jpeg, image/png"></td>
             </tr>
             </table>
             <input type="submit" name="submit"s width="100" height="48" value="Upload">
@@ -54,7 +67,7 @@ if($result){
         </form>
       </center>
     </body>
-    </html>'; 
+    </html>';
 
 } else
   {

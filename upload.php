@@ -1,38 +1,50 @@
 <?php
-if(getimagesize($_FILES['photo']['tmp_name'])==FALSE OR getimagesize($_FILES['sign']['tmp_name'])==FALSE){
+session_start();
+$id = $_SESSION['id'];
+?>
+
+
+<?php
+if(getimagesize($_FILES['photo']['tmp_name'])==FALSE OR getimagesize($_FILES['signature']['tmp_name'])==FALSE){
   echo "Failed";
 }
 else {
   $pname= addslashes($_FILES['photo']['tmp_name']);
   $pimage=base64_encode(file_get_contents(addslashes($_FILES['photo']['tmp_name'])));
-  $simage=base64_encode(file_get_contents(addslashes($_FILES['sign']['tmp_name'])));
+  $simage=base64_encode(file_get_contents(addslashes($_FILES['signature']['tmp_name'])));
 
-  saveimage($simage,$pimage);
+  saveimage($simage,$pimage,$id);
 }
-function saveimage($simage,$pimage){
+function saveimage($simage,$pimage,$id){
+      echo '<img height="100px" width="100px" src="data:image;base64,'.$pimage.'">';
+      echo '<img height="100px" width="100px" src="data:image;base64,'.$simage.'">';
       $connect = mysqli_connect("localhost","root","","erp");
-      $command = "insert into photo_data (image,sign) VALUES ('$pimage','$simage')";
+      $command = " UPDATE Student_Record SET image = '$pimage' WHERE id =$id ";
 
-      $query = mysqli_query($connect,$command);
+      $query = mysqli_query($connect,$command) or die(mysqli_error($connect));
+      $command = " UPDATE Student_Record SET signature = '$simage' WHERE id =$id ";
+
+      $query = mysqli_query($connect,$command) or die(mysqli_error($connect));
       if($query){
           //echo "Success";
-          Display();
+          Display($id);
         }
       else{
           echo "Not uploaded";
+
         }
 }
 
-function Display(){
+function Display($id){
   $connect = mysqli_connect("localhost","root","","erp");
-  $command = "SELECT * FROM photo_data WHERE id=(SELECT max(id) FROM photo_data)";
+  $command = "SELECT * FROM Student_Record WHERE id=$id ";
   $query = mysqli_query($connect,$command);
   $rownum = mysqli_num_rows($query);
   for($a=0;$a<$rownum;$a++){
     $result = mysqli_fetch_array($query);
 
       $ppicture = $result['image'];
-      $spicture = $result['sign'];
+      $spicture = $result['signature'];
       ?>
 
       <html>

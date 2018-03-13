@@ -21,6 +21,8 @@ $arr = array('sname' => $sname,'clas' => $clas, 'pc' => $pc, 'fname' => $fname, 
 
 $jstar = json_encode($arr);
 
+
+
 //echo $jsoformat;
 
 
@@ -120,6 +122,8 @@ header('Location: login.html');
           <input type="submit">
         </form>
       </fieldset>
+
+
 
   </center>
   <script>
