@@ -47,12 +47,14 @@ $output = '
                <th width="9%">DOB</th>
                <th width="15%">Email</th>
                <th width="12%">Contact No.</th>
+               <th width="12%">Action Perform</th>
             </tr>
          </thead>
       <tbody>
 ';
 if(mysqli_num_rows($query) > 0)
 {
+  $output .= "<form action='redirect.php' method='POST' >";
      while($row = mysqli_fetch_assoc($query))
      {
        $idd = $row["id"];
@@ -71,13 +73,19 @@ if(mysqli_num_rows($query) > 0)
                           <td><center >'. $row["dob"] .'</center></td>
                           <td><center >'. $row["email"] .'</center></td>
                           <td><center >'. $row["pc"] .'</center></td>
+                          <td><center>
+                          <input type="radio" name = "'.$row["id"].'" id = "'.$row["id"].'" value="Select">Select<br />
+                          <input type="radio" name = "'.$row["id"].'" id = "'.$row["id"].'" value="Reject">Reject
+                          </center>
+                        </td>
                       </tr>';
      }
+     $output .="<input type='Submit'></form>";
 }
 else
 {
      $output .= '<tr>
-                  <td colspan="9">No Data Found</td>
+                  <td colspan="10">No Data Found</td>
                  </tr>';
 }
 $output .= '</tbody></table></center></body></html>';

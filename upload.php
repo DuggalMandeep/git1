@@ -16,8 +16,8 @@ else {
   saveimage($simage,$pimage,$id);
 }
 function saveimage($simage,$pimage,$id){
-      echo '<img height="100px" width="100px" src="data:image;base64,'.$pimage.'">';
-      echo '<img height="100px" width="100px" src="data:image;base64,'.$simage.'">';
+      //echo '<img height="100px" width="100px" src="data:image;base64,'.$pimage.'">';
+      //echo '<img height="100px" width="100px" src="data:image;base64,'.$simage.'">';
       $connect = mysqli_connect("localhost","root","","erp");
       $command = " UPDATE Student_Record SET image = '$pimage' WHERE id =$id ";
 
