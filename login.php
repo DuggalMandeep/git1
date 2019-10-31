@@ -27,6 +27,7 @@ $jstar = json_encode($arr);
 
 
 /*a=0;
+// echo $jsoformat;
 $_SESSION["log"] = 3;
 $con=mysqli_connect("localhost","root","","login") or die("couldnot connect");
 $querry= "SELECT * FROM data";
